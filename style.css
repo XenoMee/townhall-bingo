@@ -16,7 +16,7 @@ ul {
   grid-template-columns: repeat(5, minmax(100px, 1fr));
   gap: 10px;
   min-width: 400px;
-  max-width: 900px;
+  max-width: 600px;
   margin: 20px auto;
 }
 
