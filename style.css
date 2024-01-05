@@ -1,3 +1,6 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 header {
   background: url("images/bingo.png");
   margin-top: 60px;
