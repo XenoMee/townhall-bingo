@@ -10,10 +10,10 @@ header {
 #bingo-card,
 ul {
   display: grid;
-  grid-template-columns: repeat(5, minmax(50px, 1fr));
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
   gap: 10px;
   min-width: 400px;
-  max-width: 600px;
+  max-width: 900px;
   margin: 20px auto;
 }
 
