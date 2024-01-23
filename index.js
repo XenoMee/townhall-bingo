@@ -63,7 +63,7 @@ function renderBingoCard(array) {
    <li>O</li>
    </ul>
    <div id = "bingo-card" > ${renderedBingoCard} </div>
-   <div id = "button-container"><button id = "create-card">Create your own card</button></div>
+   <div id = "button-container"><button id = "create-card">Create your own bingo card</button></div>
    <div id = "bingo">
     <div id="close-bingo">X</div>
     <img src = "./images/leo.gif">
