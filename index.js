@@ -1,6 +1,6 @@
 import words from "/words.js";
 const body = document.querySelector("body");
-const textarea = document.querySelector("textarea");
+const textArea = document.getElementById("own-words");
 let markedTiles = ["tile-12"];
 document.addEventListener("click", function (e) {
   if (e.target.closest("#play-bingo")) {
@@ -8,9 +8,8 @@ document.addEventListener("click", function (e) {
   } else if (e.target.closest("#create-card")) {
     body.innerHTML = `<header></header>
 
-      <textarea  placeholder="Add your words, separate them by comma"></textarea>
-      <button id = "submit">Submit</button>
-`;
+      <textarea id ="own-words" placeholder="Add your words, separate them by comma"></textarea>
+      <button id = "submit">Submit</button>`;
   } else if (e.target.closest("#submit")) {
     console.log("submit");
   } else if (e.target.closest("#close-bingo")) {
@@ -48,7 +47,9 @@ document.addEventListener("click", function (e) {
   }
 });
 
-textarea.addEventListener("keyup", function (e) {});
+textArea.addEventListener("keyup", function (e) {
+  console.log("key is up");
+});
 
 function buildTile(word, index) {
   return `<div class = "tile" id = "tile-${index}">
