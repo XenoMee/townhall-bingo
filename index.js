@@ -1,17 +1,49 @@
 import words from "/words.js";
 const body = document.querySelector("body");
-const textArea = document.getElementById("own-words");
 let markedTiles = ["tile-12"];
 document.addEventListener("click", function (e) {
   if (e.target.closest("#play-bingo")) {
     renderBingoCard(words);
   } else if (e.target.closest("#create-card")) {
     body.innerHTML = `<header></header>
-
+    <form>
       <textarea id ="own-words" placeholder="Add your words, separate them by comma"></textarea>
-      <button id = "submit">Submit</button>`;
+      <div id = "preview-of-words"></div>
+      <button id = "submit">Submit</button>
+    
+    `;
+    const preview = document.getElementById("preview-of-words");
+    const textArea = document.querySelector("textarea");
+
+    if (textArea) {
+      textArea.addEventListener("keyup", function (e) {
+        if (textArea.value) {
+          let customWords = textArea.value
+            .split(",")
+            .map((word) => word.trim())
+            .filter((word) => word !== "");
+          let previewWords = "";
+          customWords.forEach(function (word) {
+            previewWords += `<span>${word} </span>`;
+          });
+          preview.innerHTML = previewWords;
+        }
+      });
+    }
   } else if (e.target.closest("#submit")) {
-    console.log("submit");
+    e.preventDefault();
+    const textArea = document.querySelector("textarea");
+    let customWords = textArea.value
+      .split(",")
+      .map((word) => word.trim())
+      .filter((word) => word !== "");
+    shuffle(words);
+    console.log(customWords);
+    customWords.forEach((customWord, index) =>
+      words.splice(index, 1, customWord)
+    );
+    console.log(words);
+    renderBingoCard(words);
   } else if (e.target.closest("#close-bingo")) {
     const bingo = document.getElementById("bingo");
     bingo.style.display = "none";
@@ -45,10 +77,6 @@ document.addEventListener("click", function (e) {
       checkBingo(winConditions, markedTiles);
     }
   }
-});
-
-textArea.addEventListener("keyup", function (e) {
-  console.log("key is up");
 });
 
 function buildTile(word, index) {
