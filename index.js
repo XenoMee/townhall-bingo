@@ -21,7 +21,9 @@ document.addEventListener("click", function (e) {
           let customWords = textArea.value
             .split(",")
             .map((word) => word.trim())
-            .filter((word) => word !== "");
+            .filter(
+              (word, index, self) => word !== "" && self.indexOf(word) === index
+            );
           let previewWords = "";
           customWords.forEach(function (word) {
             previewWords += `<span>${word} </span>`;
