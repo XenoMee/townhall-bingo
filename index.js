@@ -44,7 +44,7 @@ document.addEventListener("click", function (e) {
     customWords.forEach((customWord, index) =>
       words.splice(index, 1, customWord)
     );
-    console.log(words);
+    markedTiles = ["tile-12"];
     renderBingoCard(words);
   } else if (e.target.closest("#close-bingo")) {
     const bingo = document.getElementById("bingo");
