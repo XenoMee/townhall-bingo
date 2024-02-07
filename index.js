@@ -94,7 +94,7 @@ function renderBingoCard(array) {
     .join("");
   body.innerHTML = `<header></header>
    <div id = "bingo-card" > ${renderedBingoCard} </div>
-   <div id = "button-container"><button id = "create-card">Create your own bingo card</button></div>
+   <div id = "button-container"><button id = "create-card">Add your own words</button></div>
    <div id = "bingo">
     <div id="close-bingo">X</div>
     <img src = "./images/leo.gif">

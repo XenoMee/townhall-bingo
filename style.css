@@ -13,6 +13,17 @@ header {
   background-repeat: no-repeat; /* Do not repeat the image */
 }
 
+form {
+  margin: auto;
+}
+
+#preview-of-words {
+  display: flex;
+  width: 400px;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
 #bingo-card,
 ul {
   display: grid;
@@ -41,7 +52,6 @@ li {
 span {
   padding: 5px;
   border-radius: 8px;
-  margin: 12px 24px;
   background-color: pink;
   color: black;
 }
@@ -79,7 +89,7 @@ textarea {
   border: 2px solid #000;
   width: 400px;
   height: 200px;
-  margin: auto;
+  margin: 10px auto;
   border-radius: 2px;
 }
 
