@@ -1,16 +1,17 @@
 import words from "/words.js";
 const body = document.querySelector("body");
+const main = document.getElementById("main");
 let markedTiles = ["tile-12"];
 document.addEventListener("click", function (e) {
   if (e.target.closest("#play-bingo")) {
     renderBingoCard(words);
   } else if (e.target.closest("#create-card")) {
-    body.innerHTML = `<header></header>
-    <form>
+    body.innerHTML += `
+    <section>
       <textarea id ="own-words" placeholder="Add your words, separate them by comma"></textarea>
       <div id = "preview-of-words"></div>
       <button id = "submit">Submit</button>
-    
+    </section>
     `;
     const preview = document.getElementById("preview-of-words");
     const textArea = document.querySelector("textarea");

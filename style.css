@@ -16,6 +16,19 @@ header {
   background-repeat: no-repeat; /* Do not repeat the image */
 }
 
+section {
+  border: 1px solid red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  max-width: 800px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
 form {
   margin: auto;
 }
@@ -92,7 +105,7 @@ textarea {
   border: 2px solid #000;
   width: 400px;
   height: 200px;
-  margin: 10px auto;
+  margin: 40px auto;
   border-radius: 2px;
 }
 
