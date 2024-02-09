@@ -138,14 +138,10 @@ textarea {
 }
 
 @media (min-width: 900px) {
-  .tile {
-    height: 75px;
-  }
 }
 
 @media (max-width: 450px) {
   .bingo-card {
-    max-width: 400px;
     margin: auto;
   }
 
