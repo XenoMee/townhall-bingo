@@ -16,6 +16,12 @@ header {
   background-repeat: no-repeat; /* Do not repeat the image */
 }
 
+button#remove-word {
+  margin: 0;
+  padding: 2px;
+  position: relative;
+  bottom: 8px;
+}
 section {
   border: 1px solid red;
   position: absolute;
@@ -74,6 +80,9 @@ span {
   border-radius: 8px;
   background-color: pink;
   color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tile {

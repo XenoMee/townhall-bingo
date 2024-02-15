@@ -1,10 +1,13 @@
 import words from "/words.js";
+let words2 = words;
+let words3 = [...words2];
 const body = document.querySelector("body");
 const main = document.getElementById("main");
 let markedTiles = ["tile-12"];
+
 document.addEventListener("click", function (e) {
   if (e.target.closest("#play-bingo")) {
-    renderBingoCard(words);
+    renderBingoCard(words2);
   } else if (e.target.closest("#create-card")) {
     body.innerHTML += `
     <section>
@@ -13,23 +16,17 @@ document.addEventListener("click", function (e) {
       <button id = "submit">Submit</button>
     </section>
     `;
-    const preview = document.getElementById("preview-of-words");
     const textArea = document.querySelector("textarea");
+    const preview = document.getElementById("preview-of-words");
+    updatePreview(words3, preview);
 
+    textArea.scrollIntoView({ behavior: "smooth" });
     if (textArea) {
       textArea.addEventListener("keyup", function (e) {
         if (textArea.value) {
-          let customWords = textArea.value
-            .split(",")
-            .map((word) => word.trim())
-            .filter(
-              (word, index, self) => word !== "" && self.indexOf(word) === index
-            );
-          let previewWords = "";
-          customWords.forEach(function (word) {
-            previewWords += `<span>${word} </span>`;
-          });
-          preview.innerHTML = previewWords;
+          addWords(textArea.value);
+          updatePreview(words3, preview);
+          console.log(`from adding, the new words are ${words3}`);
         }
       });
     }
@@ -46,14 +43,21 @@ document.addEventListener("click", function (e) {
       words.splice(index, 1, customWord)
     );
     markedTiles = ["tile-12"];
-    renderBingoCard(words);
+    renderBingoCard(words2);
+  } else if (e.target.closest(".remove-word")) {
+    const removeButton = e.target.closest(".remove-word");
+    const index = parseInt(removeButton.getAttribute("data-index"), 10);
+    if (!isNaN(index)) {
+      const preview = document.getElementById("preview-of-words");
+      removeWord(words3, index, preview);
+    }
   } else if (e.target.closest("#close-bingo")) {
     const bingo = document.getElementById("bingo");
     bingo.style.display = "none";
     const buttonContainer = document.getElementById("button-container");
     buttonContainer.innerHTML = `<button id = "restart-bingo">Restart game</button>`;
   } else if (e.target.closest("#restart-bingo")) {
-    renderBingoCard(words);
+    renderBingoCard(words2);
     markedTiles = ["tile-12"];
   } else if (e.target.closest(".tile")) {
     markedTiles.push(e.target.id);
@@ -131,4 +135,37 @@ function checkBingo(winConditions, markedTiles) {
     bingo.style.display = "flex";
     console.log("bingo!");
   }
+}
+
+function updatePreview(words, previewElement) {
+  previewElement.innerHTML = ""; // Clear existing preview
+  words.forEach((word, index) => {
+    previewElement.innerHTML += `<span id="initial-word">${word} <button class="remove-word" data-index="${index}">X</button></span>`;
+  });
+}
+
+function removeWord(array, index, previewElement) {
+  if (index > -1 && index < array.length) {
+    const wordToRemove = array[index];
+    array.splice(index, 1);
+    updatePreview(array, previewElement);
+    console.log(`from removing, the new words are: ${words3}`);
+    const textArea = document.getElementById("own-words");
+    const wordsInTextArea = textArea.value
+      .split(",")
+      .map((word) => word.trim());
+    const updatedWordsInTextArea = wordsInTextArea.filter(
+      (word) => word !== wordToRemove
+    );
+    textArea.value = updatedWordsInTextArea.join(", ");
+  }
+}
+
+function addWords(customWordsString) {
+  const customWords = customWordsString
+    .split(",")
+    .map((word) => word.trim())
+    .filter((word) => word && !words3.includes(word));
+  words3 = [...words3, ...customWords];
+  return words3;
 }
