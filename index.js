@@ -13,6 +13,7 @@ document.addEventListener("click", function (e) {
     <section>
       <textarea id ="own-words" placeholder="Add your words, separate them by comma"></textarea>
       <div id = "preview-of-words"></div>
+      <button id = "remove-all">Remove all words</button>
       <button id = "submit">Submit</button>
     </section>
     `;
@@ -56,6 +57,8 @@ document.addEventListener("click", function (e) {
     bingo.style.display = "none";
     const buttonContainer = document.getElementById("button-container");
     buttonContainer.innerHTML = `<button id = "restart-bingo">Restart game</button>`;
+  } else if (e.target.closest("#remove-all")) {
+    removeAll(words3);
   } else if (e.target.closest("#restart-bingo")) {
     renderBingoCard(words2);
     markedTiles = ["tile-12"];
@@ -161,11 +164,18 @@ function removeWord(array, index, previewElement) {
   }
 }
 
-function addWords(customWordsString) {
-  const customWords = customWordsString
+function addWords(userInput) {
+  const customWords = userInput
     .split(",")
     .map((word) => word.trim())
     .filter((word) => word && !words3.includes(word));
   words3 = [...words3, ...customWords];
   return words3;
+}
+
+function removeAll(array) {
+  array.splice(0, array.length);
+  const preview = document.getElementById("preview-of-words");
+  preview.innerHTML = "";
+  textArea.value = "";
 }
