@@ -2,7 +2,6 @@ import words from "/words.js";
 let words2 = words;
 let words3 = [...words2];
 const body = document.querySelector("body");
-const main = document.getElementById("main");
 let markedTiles = ["tile-12"];
 
 document.addEventListener("click", function (e) {
@@ -11,27 +10,27 @@ document.addEventListener("click", function (e) {
   } else if (e.target.closest("#create-card")) {
     body.innerHTML += `
     <section>
-      <textarea id ="own-words" placeholder="Add your words, separate them by comma"></textarea>
+      <textarea id ="own-words" placeholder="Add your words, separate them by comma">${words3}</textarea>
       <div id = "preview-of-words"></div>
       <button id = "remove-all">Remove all words</button>
       <button id = "submit">Submit</button>
     </section>
     `;
-    const preview = document.getElementById("preview-of-words");
-    updatePreview(words3, preview);
-
     const textArea = document.getElementById("own-words");
+    const preview = document.getElementById("preview-of-words");
+    let inputtedWords = textArea.value;
+    let arrayOfWords = splitIntoWords(inputtedWords);
+    updatePreview(arrayOfWords, preview);
+
     textArea.scrollIntoView({ behavior: "smooth" });
     if (textArea) {
       textArea.addEventListener("keyup", function (e) {
-        if (textArea.value) {
-          addWords(textArea.value);
-          updatePreview(words3, preview);
-        }
+        let inputtedWords = textArea.value;
+        let arrayOfWords = splitIntoWords(inputtedWords);
+        updatePreview(arrayOfWords, preview);
       });
     }
   } else if (e.target.closest("#submit")) {
-    e.preventDefault();
     const textArea = document.querySelector("textarea");
     let customWords = textArea.value
       .split(",")
@@ -43,7 +42,7 @@ document.addEventListener("click", function (e) {
       words.splice(index, 1, customWord)
     );
     markedTiles = ["tile-12"];
-    renderBingoCard(words2);
+    renderBingoCard(customWords);
   } else if (e.target.closest(".remove-word")) {
     const removeButton = e.target.closest(".remove-word");
     const index = parseInt(removeButton.getAttribute("data-index"), 10);
@@ -101,7 +100,7 @@ function renderBingoCard(array) {
     .join("");
   body.innerHTML = `<header></header>
    <div id = "bingo-card" > ${renderedBingoCard} </div>
-   <div id = "button-container"><button id = "create-card">Add your own words</button></div>
+   <div id = "button-container"><button id = "create-card">Create your own bingo card</button></div>
    <div id = "bingo">
     <div id="close-bingo">X</div>
     <img src = "./images/leo.gif">
@@ -139,11 +138,18 @@ function checkBingo(winConditions, markedTiles) {
   }
 }
 
-function updatePreview(words, previewElement) {
+function updatePreview(array, previewElement) {
   previewElement.innerHTML = "";
-  words.forEach((word, index) => {
+  array.forEach((word, index) => {
     previewElement.innerHTML += `<span id="initial-word">${word} <button class="remove-word" data-index="${index}">X</button></span>`;
   });
+}
+
+function splitIntoWords(inputString) {
+  return inputString
+    .split(",")
+    .map((word) => word.trim())
+    .filter((word, index, self) => self.indexOf(word) === index);
 }
 
 function removeWord(array, index, previewElement) {
@@ -161,16 +167,6 @@ function removeWord(array, index, previewElement) {
     );
     textArea.value = updatedWordsInTextArea.join(", ");
   }
-}
-
-function addWords(userInput) {
-  const customWords = userInput
-    .split(",")
-    .map((word) => word.trim())
-    .filter((word) => word && !words3.includes(word));
-  words3 = [...words3, ...customWords];
-  console.log(words3);
-  return words3;
 }
 
 function removeAll(array) {
