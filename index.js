@@ -17,17 +17,16 @@ document.addEventListener("click", function (e) {
       <button id = "submit">Submit</button>
     </section>
     `;
-    const textArea = document.querySelector("textarea");
     const preview = document.getElementById("preview-of-words");
     updatePreview(words3, preview);
 
+    const textArea = document.getElementById("own-words");
     textArea.scrollIntoView({ behavior: "smooth" });
     if (textArea) {
       textArea.addEventListener("keyup", function (e) {
         if (textArea.value) {
           addWords(textArea.value);
           updatePreview(words3, preview);
-          console.log(`from adding, the new words are ${words3}`);
         }
       });
     }
@@ -141,7 +140,7 @@ function checkBingo(winConditions, markedTiles) {
 }
 
 function updatePreview(words, previewElement) {
-  previewElement.innerHTML = ""; // Clear existing preview
+  previewElement.innerHTML = "";
   words.forEach((word, index) => {
     previewElement.innerHTML += `<span id="initial-word">${word} <button class="remove-word" data-index="${index}">X</button></span>`;
   });
@@ -170,12 +169,14 @@ function addWords(userInput) {
     .map((word) => word.trim())
     .filter((word) => word && !words3.includes(word));
   words3 = [...words3, ...customWords];
+  console.log(words3);
   return words3;
 }
 
 function removeAll(array) {
-  array.splice(0, array.length);
+  const textArea = document.getElementById("own-words");
   const preview = document.getElementById("preview-of-words");
+  array.splice(0, array.length);
   preview.innerHTML = "";
   textArea.value = "";
 }
