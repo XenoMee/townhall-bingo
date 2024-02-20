@@ -149,6 +149,7 @@ function splitIntoWords(inputString) {
   return inputString
     .split(",")
     .map((word) => word.trim())
+    .filter((word) => word.length > 0)
     .filter((word, index, self) => self.indexOf(word) === index);
 }
 
