@@ -89,7 +89,7 @@ document.addEventListener("click", function (e) {
 
 function buildTile(word, index) {
   return `<div class = "tile" id = "tile-${index}">
-            ${word}
+            <p>${word}</p>
         </div>`;
 }
 
