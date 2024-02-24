@@ -5,7 +5,6 @@ body {
   flex-direction: column;
 }
 header {
-  background: url("images/bingo.png");
   display: flex;
   justify-content: center;
   font-size: 40px;
@@ -15,9 +14,23 @@ header {
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
 }
+h1 {
+  color: #e54246;
+  margin: 1rem;
+}
 
+#h1-bingo {
+  color: #3964c3;
+  font-family: "Lobster", sans-serif;
+  margin: 1rem auto;
+}
 button.remove-word {
   padding: 4px;
+}
+
+.focus {
+  background-color: #e54246;
+  color: white;
 }
 
 .shown {
@@ -26,6 +39,20 @@ button.remove-word {
 
 .hidden {
   display: none;
+}
+
+#option-btn-container {
+  display: flex;
+  margin: 1rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.option-btn {
+  display: flex;
+  width: 16em;
+  justify-content: center;
+  margin: 0.5rem;
 }
 
 section {
@@ -81,7 +108,7 @@ form {
   min-width: 400px;
   max-width: 800px;
   width: 100%;
-  margin: 20px auto;
+  margin: 20px auto 40px;
 }
 
 ul {

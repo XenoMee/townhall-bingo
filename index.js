@@ -67,6 +67,7 @@ document.addEventListener("click", function (e) {
     const buttonContainer = document.getElementById("button-container");
     buttonContainer.innerHTML = `<button id = "restart-bingo">Restart game</button>`;
   } else if (e.target.closest("#remove-all")) {
+    const removeAllBtn = document.getElementById("remove-all");
     removeAll(words3);
   } else if (e.target.closest("#restart-bingo")) {
     renderBingoCard(words2);

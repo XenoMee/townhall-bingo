@@ -10,12 +10,16 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <header></header>
+    <header>
+      <h1>
+        Town Hall <span><h2 id="h1-bingo">Bingo</h2></span>
+      </h1>
+    </header>
     <button id="play-bingo">Play Bingo</button>
     <div id="bingo-container"></div>
     <section>
@@ -25,8 +29,10 @@
         placeholder="Add your words, separate them by comma"
       ></textarea>
       <div id="preview-of-words"></div>
-      <button id="remove-all">Remove all words</button>
-      <button id="submit">Submit</button>
+      <div id="option-btn-container">
+        <button class="option-btn" id="remove-all">Remove all words</button>
+        <button class="option-btn" id="submit">Submit</button>
+      </div>
     </section>
     <script src="index.js" type="module"></script>
   </body>
