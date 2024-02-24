@@ -24,6 +24,10 @@ h1 {
   font-family: "Lobster", sans-serif;
   margin: 1rem auto;
 }
+
+#play-bingo {
+  margin-top: 5rem;
+}
 button.remove-word {
   padding: 4px;
 }
