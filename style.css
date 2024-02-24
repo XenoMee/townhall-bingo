@@ -7,22 +7,19 @@ body {
 header {
   display: flex;
   justify-content: center;
-  font-size: 40px;
-  margin-top: 60px;
+  font-size: 3.25rem;
   min-width: 350px;
-  height: 200px;
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
+  margin: 4rem;
 }
 h1 {
   color: #e54246;
-  margin: 1rem;
+  line-height: 0.8;
 }
 
 #h1-bingo {
   color: #3964c3;
   font-family: "Lobster", sans-serif;
-  margin: 1rem auto;
+  margin-top: 10rem;
 }
 
 #play-bingo {
