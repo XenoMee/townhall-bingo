@@ -1,27 +1,27 @@
 import words from "/words.js";
 let words2 = words;
 let words3 = [...words2];
-const body = document.querySelector("body");
 let markedTiles = ["tile-12"];
+const body = document.querySelector("body");
+const bingoContainer = document.getElementById("bingo-container");
+const playBingoBtn = document.getElementById("play-bingo");
+const section = document.querySelector("section");
+const textArea = document.getElementById("own-words");
+const preview = document.getElementById("preview-of-words");
+let inputtedWords = "";
+let arrayOfWords = "";
+let createCardBtn = document.getElementById("create-card");
 
 document.addEventListener("click", function (e) {
   if (e.target.closest("#play-bingo")) {
     renderBingoCard(words2);
+    playBingoBtn.classList.add("hidden");
   } else if (e.target.closest("#create-card")) {
-    body.innerHTML += `
-    <section>
-      <textarea id ="own-words" placeholder="Add your words, separate them by comma">${words3}</textarea>
-      <div id = "preview-of-words"></div>
-      <button id = "remove-all">Remove all words</button>
-      <button id = "submit">Submit</button>
-    </section>
-    `;
-    const textArea = document.getElementById("own-words");
-    const preview = document.getElementById("preview-of-words");
-    let inputtedWords = textArea.value;
-    let arrayOfWords = splitIntoWords(inputtedWords);
+    section.classList.toggle("shown");
+    textArea.innerHTML = `${words3}`;
+    inputtedWords = textArea.value;
+    arrayOfWords = splitIntoWords(inputtedWords);
     updatePreview(arrayOfWords, preview);
-
     textArea.scrollIntoView({ behavior: "smooth" });
     if (textArea) {
       textArea.addEventListener("keyup", function (e) {
@@ -30,14 +30,25 @@ document.addEventListener("click", function (e) {
         updatePreview(arrayOfWords, preview);
       });
     }
+    createCardBtn.disabled = true;
   } else if (e.target.closest("#submit")) {
-    const textArea = document.querySelector("textarea");
+    console.log(`These are arrayofwords: ${arrayOfWords}`);
+    section.classList.toggle("shown");
     let customWords = textArea.value
       .split(",")
       .map((word) => word.trim())
-      .filter((word) => word !== "");
+      .filter(
+        (word, index, self) => self.indexOf(word) === index && word != ""
+      );
+
     shuffle(words);
     console.log(customWords);
+    customWords.forEach((customWord, index) =>
+      words.splice(index, 1, customWord)
+    );
+    markedTiles = ["tile-12"];
+    renderBingoCard(customWords);
+
     customWords.forEach((customWord, index) =>
       words.splice(index, 1, customWord)
     );
@@ -60,6 +71,9 @@ document.addEventListener("click", function (e) {
   } else if (e.target.closest("#restart-bingo")) {
     renderBingoCard(words2);
     markedTiles = ["tile-12"];
+  } else if (e.target.closest("#close-add-words")) {
+    section.classList.toggle("shown");
+    createCardBtn.disabled = false;
   } else if (e.target.closest(".tile")) {
     markedTiles.push(e.target.id);
     document.getElementById(e.target.id).classList.toggle("marked");
@@ -89,7 +103,7 @@ document.addEventListener("click", function (e) {
 
 function buildTile(word, index) {
   return `<div class = "tile" id = "tile-${index}">
-            <p>${word}</p>
+            ${word}
         </div>`;
 }
 
@@ -98,7 +112,7 @@ function renderBingoCard(array) {
   const renderedBingoCard = bingoCard
     .map((tile, index) => buildTile(tile, index))
     .join("");
-  body.innerHTML = `<header></header>
+  bingoContainer.innerHTML = `
    <div id = "bingo-card" > ${renderedBingoCard} </div>
    <div id = "button-container"><button id = "create-card">Create your own bingo card</button></div>
    <div id = "bingo">
