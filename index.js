@@ -17,6 +17,7 @@ document.addEventListener("click", function (e) {
     renderBingoCard(words2);
     playBingoBtn.classList.add("hidden");
   } else if (e.target.closest("#create-card")) {
+    bingoContainer.classList.toggle("blur");
     section.classList.toggle("shown");
     textArea.innerHTML = `${words3}`;
     inputtedWords = textArea.value;
@@ -74,6 +75,7 @@ document.addEventListener("click", function (e) {
     markedTiles = ["tile-12"];
   } else if (e.target.closest("#close-add-words")) {
     section.classList.toggle("shown");
+    bingoContainer.classList.toggle("blur");
     createCardBtn.disabled = false;
   } else if (e.target.closest(".tile")) {
     markedTiles.push(e.target.id);
