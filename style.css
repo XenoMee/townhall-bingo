@@ -75,7 +75,7 @@ section {
   box-shadow: 4px 4px 0px 0px #000;
   border: 2px solid #000;
   border-radius: 12px;
-  margin: auto;
+  margin: auto 1rem;
 }
 #close-add-words {
   position: absolute;
