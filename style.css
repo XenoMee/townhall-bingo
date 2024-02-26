@@ -110,7 +110,7 @@ form {
 
 #bingo-card {
   display: grid;
-  grid-template: 4rem / repeat(5, minmax(4rem, 1fr));
+  grid-template: 4rem / repeat(5, 1fr);
   grid-auto-rows: 4rem;
   gap: 2.5rem;
   min-width: 400px;
@@ -225,5 +225,6 @@ textarea {
 @media (max-width: 450px) {
   .tile {
     font-size: 0.75em;
+    line-height: 0.8em;
   }
 }
