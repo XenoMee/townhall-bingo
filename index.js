@@ -33,8 +33,8 @@ document.addEventListener("click", function (e) {
     }
     createCardBtn.disabled = true;
   } else if (e.target.closest("#submit")) {
-    console.log(`These are arrayofwords: ${arrayOfWords}`);
     section.classList.toggle("shown");
+    bingoContainer.classList.toggle("blur");
     let customWords = textArea.value
       .split(",")
       .map((word) => word.trim())
