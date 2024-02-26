@@ -4,6 +4,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+  user-select: none;
 }
 header {
   display: flex;
